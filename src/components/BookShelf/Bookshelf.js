@@ -5,16 +5,11 @@ import { books } from "../../db/Books";
 
 const Bookshelf = () => {
   const [products, setProducts] = useState(books);
-//   console.log(products)
+  localStorage.setItem("products", products)
 
-//   const handleChange = (event) => {
-//     console.log(event.target.value)
-//     // setProducts()
-//   };
   const handleChange = (id, newStatus) => {
     console.log(id,newStatus)
-    setProducts(prevBooks =>
-        
+    setProducts(prevBooks => 
       prevBooks.map(book =>{
         console.log(book)
         return book._id === id ? { ...book, category: newStatus } : book
