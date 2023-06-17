@@ -4,7 +4,7 @@ import "./SearchBook.css";
 import { books } from "../../db/Books";
 
 const SearchBook = () => {
-  const [products, setProducts] = useState(books);
+  // const [products, setProducts] = useState(books);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -12,7 +12,7 @@ const SearchBook = () => {
     const searchTerm = event.target.value.toLowerCase();
     setSearchTerm(searchTerm);
 
-    const filteredBooks = products.filter((book) =>
+    const filteredBooks = books.filter((book) =>
       book?.name?.toLowerCase().includes(searchTerm)
     );
     setSearchResults(filteredBooks);
@@ -27,16 +27,20 @@ const SearchBook = () => {
         value={searchTerm}
         onChange={handleSearch}
       />
-
-      {searchResults.length > 0 ? (
-        <ul>
-          {searchResults.map((book) => (
-            <li key={book._id}>{book.name}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>No results found.</p>
-      )}
+      <div className="bookshelf-container">
+        {searchResults.length > 0 ? (
+          <ul>
+            {searchResults.map((book) => (
+              <div className="book-container" key={book._id}>
+                <img className="book-image" src={book.img} alt={book.name} />
+                <h2>{book.name}</h2>
+              </div>
+            ))}
+          </ul>
+        ) : (
+          <p>No results found.</p>
+        )}
+      </div>
     </div>
   );
 };
